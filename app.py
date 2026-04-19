@@ -6,7 +6,7 @@ import numpy as np
 import os
 
 # --- CONFIGURATION & STYLING ---
-st.set_page_config(page_title="StudentMate AI: Performance Predictor", layout="wide")
+st.set_page_config(page_title="StudentMate : Performance Predictor", layout="wide")
 
 # Custom CSS for Dark Mode and enhanced UI
 st.markdown("""
@@ -17,6 +17,12 @@ st.markdown("""
     [data-testid="stToolbar"] a {display: none !important;} 
     [data-testid="manage-app-button"] {display: none !important;}
     [data-testid="stDecoration"] {display: none !important;}
+    
+    /* Remove huge top padding */
+    .block-container {
+        padding-top: 2rem !important;
+        padding-bottom: 2rem !important;
+    }
     
     .stApp {
         font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
