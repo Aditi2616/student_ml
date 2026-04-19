@@ -12,7 +12,6 @@ st.set_page_config(page_title="StudentMate AI: Performance Predictor", layout="w
 st.markdown("""
 <style>
     /* --- HIDE STREAMLIT BRANDING & CLOUD BADGES --- */
-    #MainMenu {visibility: hidden !important;}
     header {visibility: hidden !important;}
     footer {visibility: hidden !important;}
     .stDeployButton {display: none !important;}
@@ -180,9 +179,11 @@ def process_batch_dataframe(df):
         'internet access': 'InternetAccess',
         'internet_access': 'InternetAccess',
         'internet': 'InternetAccess',
-        'extracurricular': 'Extracurricular',
-        'extra curricular': 'Extracurricular',
-        'activities': 'Extracurricular',
+        'projects_hackathons': 'Projects_Hackathons',
+        'projects': 'Projects_Hackathons',
+        'hackathons': 'Projects_Hackathons',
+        'projects and hackathons': 'Projects_Hackathons',
+        'projects & hackathons': 'Projects_Hackathons',
         'stresslevel': 'StressLevel',
         'stress level': 'StressLevel',
         'stress_level': 'StressLevel',
@@ -208,7 +209,7 @@ def process_batch_dataframe(df):
         'Assignments': 70.0,
         'Motivation': 'Medium',
         'InternetAccess': 'No',
-        'Extracurricular': 'No',
+        'Projects_Hackathons': 'No',
         'StressLevel': 'Medium'
     }
     
@@ -264,7 +265,7 @@ if model:
             
             st.markdown("### Contextual Factors")
             internet = st.selectbox("Internet Access", ["Yes", "No"])
-            extracurricular = st.selectbox("Extracurricular Activities", ["Yes", "No"])
+            projects = st.selectbox("Projects & Hackathons", ["Yes", "No"])
             stress = st.selectbox("Stress Level", ["Low", "Medium", "High"], index=1)
             
         with col2:
@@ -279,7 +280,7 @@ if model:
                 'Assignments': [assignments],
                 'Motivation': [motivation],
                 'InternetAccess': [internet],
-                'Extracurricular': [extracurricular],
+                'Projects_Hackathons': [projects],
                 'StressLevel': [stress]
             })
             
@@ -339,7 +340,7 @@ if model:
             'Assignments': [90.0, 100.0, 45.0],
             'Motivation': ['Medium', 'High', 'Low'],
             'InternetAccess': ['Yes', 'Yes', 'No'],
-            'Extracurricular': ['Yes', 'No', 'Yes'],
+            'Projects_Hackathons': ['Yes', 'No', 'Yes'],
             'StressLevel': ['Medium', 'Low', 'High']
         })
         
@@ -375,7 +376,7 @@ if model:
                         st.markdown('<div class="info-box">Missing columns or values were automatically handled to ensure successful prediction.</div>', unsafe_allow_html=True)
                     
                     # 2. Extract strictly the features the model needs
-                    model_features = ['Age', 'StudyHours', 'Attendance', 'Assignments', 'InternetAccess', 'Extracurricular', 'StressLevel', 'Motivation']
+                    model_features = ['Age', 'StudyHours', 'Attendance', 'Assignments', 'InternetAccess', 'Projects_Hackathons', 'StressLevel', 'Motivation']
                     pred_input = processed_data[model_features]
                     
                     # 3. Predict
