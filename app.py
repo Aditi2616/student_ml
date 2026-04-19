@@ -12,37 +12,35 @@ st.set_page_config(page_title="StudentMate AI: Performance Predictor", layout="w
 st.markdown("""
 <style>
     .stApp {
-        background-color: #0E1117;
-        color: #FAFAFA;
         font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
     
     /* Typography */
     h1, h2, h3, h4, h5, h6 { 
-        color: #FFFFFF; 
         font-weight: 700;
         letter-spacing: -0.02em;
     }
     
     /* Metrics box */
     .metric-card {
-        background-color: #1E2129;
+        background-color: var(--secondary-background-color);
         border-radius: 8px;
         padding: 24px;
         text-align: center;
-        border: 1px solid #363A45;
+        border: 1px solid var(--primary-color);
         margin-bottom: 16px;
         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        color: var(--text-color);
     }
     
-    .grade-A { color: #00FF88; font-size: 3.5rem; font-weight: 800; line-height: 1; margin-top: 10px; display: block; }
-    .grade-B { color: #00D5FF; font-size: 3.5rem; font-weight: 800; line-height: 1; margin-top: 10px; display: block; }
-    .grade-C { color: #FFB300; font-size: 3.5rem; font-weight: 800; line-height: 1; margin-top: 10px; display: block; }
-    .grade-D { color: #FF3366; font-size: 3.5rem; font-weight: 800; line-height: 1; margin-top: 10px; display: block; }
+    .grade-A { color: #00FF88; font-size: 3.5rem; font-weight: 800; line-height: 1; margin-top: 10px; display: block; text-shadow: 0 0 2px rgba(0,0,0,0.1); }
+    .grade-B { color: #00D5FF; font-size: 3.5rem; font-weight: 800; line-height: 1; margin-top: 10px; display: block; text-shadow: 0 0 2px rgba(0,0,0,0.1); }
+    .grade-C { color: #FFB300; font-size: 3.5rem; font-weight: 800; line-height: 1; margin-top: 10px; display: block; text-shadow: 0 0 2px rgba(0,0,0,0.1); }
+    .grade-D { color: #FF3366; font-size: 3.5rem; font-weight: 800; line-height: 1; margin-top: 10px; display: block; text-shadow: 0 0 2px rgba(0,0,0,0.1); }
     
     /* Insight boxes */
     .warning-box {
-        background: rgba(255, 51, 102, 0.08);
+        background: rgba(255, 51, 102, 0.15);
         border-left: 4px solid #FF3366;
         padding: 16px;
         border-radius: 0 4px 4px 0;
@@ -50,7 +48,7 @@ st.markdown("""
         font-size: 0.95rem;
     }
     .success-box {
-        background: rgba(0, 255, 136, 0.08);
+        background: rgba(0, 255, 136, 0.15);
         border-left: 4px solid #00FF88;
         padding: 16px;
         border-radius: 0 4px 4px 0;
@@ -58,52 +56,39 @@ st.markdown("""
         font-size: 0.95rem;
     }
     .info-box {
-        background: rgba(0, 213, 255, 0.08);
+        background: rgba(0, 213, 255, 0.15);
         border-left: 4px solid #00D5FF;
         padding: 16px;
         border-radius: 0 4px 4px 0;
         margin-bottom: 16px;
         font-size: 0.95rem;
-        color: #E2E8F0;
     }
 
     /* Buttons Overrides */
     div.stDownloadButton > button {
-        background-color: #2F3646;
-        color: #FFFFFF !important;
-        border: 1px solid #4B5563;
+        border: 1px solid var(--primary-color);
         font-weight: 600;
         padding: 0.5rem 1rem;
         transition: all 0.2s ease;
     }
-    div.stDownloadButton > button:hover {
-        background-color: #374151;
-        border-color: #6B7280;
-    }
     
     /* File Uploader override to make it pop */
     section[data-testid="stFileUploadDropzone"] {
-        background-color: #1A1D24 !important;
-        border: 2px dashed #00D5FF !important;
+        background-color: var(--secondary-background-color) !important;
+        border: 2px dashed var(--primary-color) !important;
         border-radius: 8px !important;
         opacity: 1 !important;
         padding: 2rem !important;
     }
     section[data-testid="stFileUploadDropzone"] * {
-        color: #FAFAFA !important;
+        color: var(--text-color) !important;
         opacity: 1 !important;
     }
     section[data-testid="stFileUploadDropzone"] button {
-        background-color: #2F3646 !important;
-        color: #FFFFFF !important;
-        font-weight: 600 !important;
-        border: 1px solid #4B5563 !important;
+        border: 1px solid var(--primary-color) !important;
         border-radius: 4px !important;
+        font-weight: 600 !important;
         padding: 0.5rem 1rem !important;
-    }
-    section[data-testid="stFileUploadDropzone"] button:hover {
-        background-color: #374151 !important;
-        border-color: #6B7280 !important;
     }
     
     /* Spacing between elements */
@@ -295,7 +280,7 @@ if model:
                 st.markdown(f"""
                 <div class="metric-card">
                     <h4>Predicted Score</h4>
-                    <span style="font-size:3.5rem; font-weight:800; line-height:1; color:#FFFFFF; margin-top:10px; display:block;">{pred_score:.1f}%</span>
+                    <span style="font-size:3.5rem; font-weight:800; line-height:1; color:var(--text-color); margin-top:10px; display:block;">{pred_score:.1f}%</span>
                 </div>
                 """, unsafe_allow_html=True)
                 
@@ -320,7 +305,6 @@ if model:
                 fig.update_layout(
                     plot_bgcolor="rgba(0,0,0,0)",
                     paper_bgcolor="rgba(0,0,0,0)",
-                    font_color="#FAFAFA",
                     margin=dict(l=0, r=0, t=40, b=0)
                 )
                 fig.update_yaxes(autorange="reversed")
