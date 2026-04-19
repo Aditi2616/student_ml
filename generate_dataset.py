@@ -12,7 +12,7 @@ def generate_data(num_samples=1000):
     
     # Categoricals
     internet_access = np.random.choice(['Yes', 'No'], size=num_samples, p=[0.85, 0.15])
-    extracurricular = np.random.choice(['Yes', 'No'], size=num_samples, p=[0.6, 0.4])
+    projects_hackathons = np.random.choice(['Yes', 'No'], size=num_samples, p=[0.5, 0.5])
     stress_level = np.random.choice(['Low', 'Medium', 'High'], size=num_samples, p=[0.3, 0.5, 0.2])
     motivation = np.random.choice(['Low', 'Medium', 'High'], size=num_samples, p=[0.2, 0.5, 0.3])
 
@@ -27,7 +27,7 @@ def generate_data(num_samples=1000):
     
     # Categorical Effects
     int_effect = np.where(internet_access == 'Yes', np.random.normal(5, 2, num_samples), np.random.normal(-5, 2, num_samples))
-    extra_effect = np.where(extracurricular == 'Yes', np.random.normal(2, 1, num_samples), 0)
+    proj_effect = np.where(projects_hackathons == 'Yes', np.random.normal(5, 1.5, num_samples), 0)
     
     stress_map = {'Low': 5, 'Medium': 0, 'High': -8}
     stress_effect = pd.Series(stress_level).map(stress_map).values + np.random.normal(0, 2, num_samples)
@@ -35,7 +35,7 @@ def generate_data(num_samples=1000):
     motivation_map = {'Low': -5, 'Medium': 0, 'High': 7}
     mot_effect = pd.Series(motivation).map(motivation_map).values + np.random.normal(0, 2, num_samples)
     
-    score = score + int_effect + extra_effect + stress_effect + mot_effect
+    score = score + int_effect + proj_effect + stress_effect + mot_effect
     
     # Add some noise
     score += np.random.normal(0, 4, num_samples)
@@ -49,7 +49,7 @@ def generate_data(num_samples=1000):
         'Attendance': np.round(attendance, 1),
         'Assignments': np.round(assignments, 1),
         'InternetAccess': internet_access,
-        'Extracurricular': extracurricular,
+        'Projects_Hackathons': projects_hackathons,
         'StressLevel': stress_level,
         'Motivation': motivation,
         'ExamScore': np.round(score, 1)
