@@ -12,10 +12,9 @@ st.set_page_config(page_title="StudentMate AI: Performance Predictor", layout="w
 st.markdown("""
 <style>
     /* --- HIDE STREAMLIT BRANDING & CLOUD BADGES --- */
-    header {visibility: hidden !important;}
     footer {visibility: hidden !important;}
     .stDeployButton {display: none !important;}
-    [data-testid="stToolbar"] {visibility: hidden !important;}
+    [data-testid="stToolbar"] a {display: none !important;} 
     [data-testid="manage-app-button"] {display: none !important;}
     [data-testid="stDecoration"] {display: none !important;}
     
