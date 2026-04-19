@@ -11,6 +11,15 @@ st.set_page_config(page_title="StudentMate AI: Performance Predictor", layout="w
 # Custom CSS for Dark Mode and enhanced UI
 st.markdown("""
 <style>
+    /* --- HIDE STREAMLIT BRANDING & CLOUD BADGES --- */
+    #MainMenu {visibility: hidden !important;}
+    header {visibility: hidden !important;}
+    footer {visibility: hidden !important;}
+    .stDeployButton {display: none !important;}
+    [data-testid="stToolbar"] {visibility: hidden !important;}
+    [data-testid="manage-app-button"] {display: none !important;}
+    [data-testid="stDecoration"] {display: none !important;}
+    
     .stApp {
         font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
@@ -203,6 +212,11 @@ def process_batch_dataframe(df):
         'StressLevel': 'Medium'
     }
     
+    # Validate if the user uploaded a completely unrelated CSV
+    found_keys = [k for k in required_cols.keys() if k in df.columns]
+    if len(found_keys) == 0:
+        raise ValueError("We couldn't find any relevant data columns (like Study Hours, Attendance, etc.) in your CSV. Please make sure your file matches the Sample Template before uploading.")
+        
     missing_handled = False
     
     # 2. Handle completely missing columns
