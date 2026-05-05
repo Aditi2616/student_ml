@@ -368,7 +368,7 @@ if model:
         if uploaded_file is not None:
             raw_batch_data = pd.read_csv(uploaded_file)
             st.write("Uploaded Data Preview:")
-            st.dataframe(raw_batch_data.head(), use_container_width=True)
+            st.dataframe(raw_batch_data, use_container_width=True)
             
             st.markdown("<br>", unsafe_allow_html=True)
             
@@ -394,7 +394,7 @@ if model:
                     results_data.insert(0, 'Predicted_Score', [round(p, 1) for p in preds])
                     
                     st.success("Batch processing complete.")
-                    st.dataframe(results_data.head(10), use_container_width=True)
+                    st.dataframe(results_data, use_container_width=True)
                     
                     st.markdown("<br>", unsafe_allow_html=True)
                     
